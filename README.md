@@ -1,120 +1,95 @@
-# End2End YOLOv11 Streamlit App
+# YOLOv11 Streamlit App - Object Detection, Segmentation & Pose Estimation
 
-This project is a **Streamlit-based application** that performs **Object Detection, Segmentation, and Pose Estimation** using YOLOv11 models.
+This repository contains a **YOLOv11-powered Streamlit application** that processes **images and videos** for **Object Detection, Segmentation, and Pose Estimation**. The app is containerized using **Docker** and features **CI/CD deployment with GitHub Actions**.
 
-## 🚀 Features
-
-- **Object Detection:** Detect objects in images and videos using YOLOv11.
-- **Segmentation:** Perform instance segmentation to segment objects in an image.
-- **Pose Estimation:** Identify human poses in images and videos.
-- **User-friendly UI:** Built using Streamlit for easy interaction.
+![App Output](images/app_output.jpg)
+![Detected Image](images/detectedimage1.jpg)
 
 ---
 
-## 🏗️ Project Structure
-
-```
-YOLO11_STREAMLIT/
-│── config/
-│   ├── config.py                 # Configuration file (paths, constants)
-│── images/
-│   ├── image1.jpg                # Sample image
-│   ├── detectedimage1.jpg         # Processed image
-│── utils/
-│   ├── image_processing.py       # Image processing utilities
-│   ├── model_loader.py           # Model loading functions
-│   ├── video_processing.py       # Video processing utilities
-│── videos/
-│   ├── video1.mp4                # Sample video 1
-│   ├── video2.mp4                # Sample video 2
-│── weights/                      # Folder for YOLO model weights
-│── app.py                        # Main Streamlit application
-│── requirements.txt               # Required dependencies
-│── .gitignore                     # Ignore unnecessary files
-```
+## **Features**
+- **Image & Video Processing**: Supports real-time object detection, segmentation, and pose estimation.
+- **YOLOv11 Integration**: Uses pretrained **YOLOv11 models**.
+- **Streamlit UI**: Interactive web app for easy usage.
+- **Docker Support**: Containerized application for easy deployment.
+- **CI/CD with GitHub Actions**: Automates build and deployment.
 
 ---
 
-## 🛠️ Setup Instructions
+## **Installation & Running Locally**
 
-### 1️⃣ Clone the Repository
-
-```sh
-git clone https://github.com/yourusername/YOLO11_STREAMLIT.git
-cd YOLO11_STREAMLIT
+### **1. Clone the Repository**
+```bash
+git clone https://github.com/your-username/E2E_ObjectDetection_Segmentation_PoseEstimation_CICD.git
+cd E2E_ObjectDetection_Segmentation_PoseEstimation_CICD
 ```
 
-### 2️⃣ Install Dependencies
+### **2. Install Dependencies**
+Create a virtual environment (optional but recommended):
+```bash
+python -m venv venv
+source venv/bin/activate  # On macOS/Linux
+venv\Scripts\activate     # On Windows
+```
 
-Create a virtual environment and install required packages:
-
-```sh
+Install dependencies:
+```bash
 pip install -r requirements.txt
 ```
 
-### 3️⃣ Run the Streamlit App
-
-```sh
+### **3. Run Streamlit App**
+```bash
 streamlit run app.py
 ```
 
+Access the app at **http://localhost:8501**.
+
 ---
 
-## 📂 Configuration (config.py)
+## **Docker Setup**
 
-Modify `config/config.py` to update paths and parameters:
-
-```python
-ROOT = Path(__file__).parent.parent
-IMAGES_DIR = ROOT / 'images'
-VIDEO_DIR = ROOT / 'videos'
-MODEL_DIR = ROOT / 'weights'
-DETECTION_MODEL = MODEL_DIR / 'yolo11n.pt'
+### **1. Build Docker Image**
+```bash
+docker build -t yolo11-streamlit .
 ```
 
----
+### **2. Run Docker Container**
+```bash
+docker run -p 8501:8501 yolo11-streamlit
+```
 
-## 🎯 Usage
-
-### **🔹 Image Processing**
-
-1. Upload an image via the sidebar.
-2. Choose the **model type** (Detection, Segmentation, or Pose Estimation).
-3. Click "Detect Objects" to process the image.
-
-### **🔹 Video Processing**
-
-1. Select a sample video or upload your own.
-2. Choose the **model type** (Detection, Segmentation, or Pose Estimation).
-3. Click "Detect Video Objects" to run YOLO on video frames.
+App will be available at **http://localhost:8501**.
 
 ---
 
-## 🔧 Troubleshooting
+## **GitHub Actions CI/CD Pipeline**
+This project uses **GitHub Actions** for automated deployment.
 
-- **Issue:** Model not loading?
+### **Workflow Steps:**
+1. **Builds and Tests** the application.
+2. **Creates & Pushes Docker Image** to Docker Hub.
+3. **Deploys to a Remote Server** (Optional).
 
-  - Ensure the weights are in the `weights/` folder.
-  - Check `config.py` for correct paths.
+### **Triggering the Workflow**
+The workflow runs automatically on **push to the `main` branch**.
 
-- **Issue:** App crashes on large videos?
-
-  - Try resizing the video before uploading.
-
----
-
-## 📝 License
-
-This project is licensed under the **MIT License**.
-
----
-
-## 💡 Acknowledgments
-
-- **Ultralytics YOLOv11** for the core object detection model.
-- **Streamlit** for the interactive UI.
+To manually trigger:
+1. Go to **GitHub → Actions**.
+2. Select **Deploy Streamlit App** workflow.
+3. Click **Run Workflow**.
 
 ---
 
-Enjoy using the **YOLO11 Streamlit App**! 🚀
-
+## **Project Structure**
+```
+.github/workflows/    # GitHub Actions CI/CD workflow
+config/               # Configuration files
+images/               # Sample images for testing
+utils/                # Image & video processing utilities
+videos/               # Sample video files
+weights/              # YOLOv11 model weights
+.gitignore            # Git ignore rules
+app.py                # Streamlit application
+Dockerfile            # Docker container definition
+requirements.txt      # Python dependencies
+```
